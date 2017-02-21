@@ -125,82 +125,82 @@ ja:
 
     attributes:
       spina/account:
-        name: Website name
-        address: Address
-        postal_code: Postal code
-        city: City
-        phone: Phone
+        name: Webサイト名
+        address: 住所
+        postal_code: 郵便番号
+        city: 都道府県名
+        phone: 電話番号
         email: Email
         kvk_identifier: Chamber of commerce
         kvk_identifier_description: Chamber of commerce
         vat_identifier: VAT
         vat_identifier_description: VAT
-        theme: Theme website
-        logo: Logo
+        theme: テーマ
+        logo: ロゴ
         google_analytics: Google Analytics
         google_site_verification: Google Site Verification
-        robots_allowed: Visible in search engines
+        robots_allowed: robots許可
         facebook: Facebook
         twitter: Twitter
         google_plus: Google+
 
       spina/attachment:
-        created_at: Created at
-        name: Filename
-        size: Size
+        created_at: 作成日
+        name: ファイル名
+        size: サイズ
 
       spina/page:
-        title: Title
-        title_placeholder: Page title
+        title: タイトル
+        title_placeholder: タイトル
         seo_title: SEO <title>
-        seo_title_placeholder: This title is used in the <title>-tag
+        seo_title_placeholder: このタイトルは <title> タグに使われます
         description: Meta description
-        description_description: This description will be shown in search results
-        description_placeholder: Short description of your page
-        draft: Draft
-        draft_description: Great for when your page is not quite finished
-        skip_to_first_child: Forward
-        skip_to_first_child_description: Forward to first child page
-        link_url: Page Redirect
-        link_url_description: Forward to URL
-        link_url_placeholder: e.g. http://www.example.com/
-        show_in_menu: Show in navigation
-        show_in_menu_description: "When turned off this page won't be shown in your navigation"
-        menu_title: Navigation title
-        menu_title_placeholder: Leave empty to use the page title
-        view_template: Page template
-        ancestry: Parent page
-        no_parent: No parent
+        description_description: 検索結果の下に表示される説明文です
+        description_placeholder: あなたのwebページの短い説明
+        draft: 下書き
+        draft_description: 未完成のときに設定してください
+        skip_to_first_child: スキップ
+        skip_to_first_child_description: 先頭ページへジャンプ
+        link_url: ページリダイレクト
+        link_url_description: URLへ遷移
+        link_url_placeholder: 例 http://www.example.com/
+        show_in_menu: ナビゲーションに表示
+        show_in_menu_description: "オフにするとナビゲーションに表示されません"
+        menu_title: ナビゲーションタイトル
+        menu_title_placeholder: ページタイトルと同じにするには空白にしてください
+        view_template: テンプレート
+        ancestry: 親ページ
+        no_parent: 親なし
 
       spina/navigation:
-        label: Label
-        auto_add_pages: Automatically add pages
-        auto_add_pages_description: New pages are added automatically to this navigation
-        pages: Pages
-        pages_description: Select the pages you want to use in this navigation
+        label: ラベル
+        auto_add_pages: ページの自動追加
+        auto_add_pages_description: ナビゲーションに自動追加されました
+        pages: ページ
+        pages_description: ナビゲーションで使いたいページを選択してください
 
       spina/user:
         email: Email
-        password: Password
-        name: Name
-        name_placeholder: Name
-        email: Email
-        email_description: Your email must be unique
-        password: Password
-        password_description: Leave blank to keep password
-        password_confirmation: Confirm password
-        admin: Administrator
-        user: User
-        admin_description: Administrators can create users
-        role: Role
-        last_logged_in: Last logged in
+        password: パスワード
+        name: 名前
+        name_placeholder: 名前
+        email_description: Email
+        password: パスワード
+        password_description: 同じパスワードにするには空白にしてください
+        password_confirmation: パスワード確認
+        admin: 管理者
+        user: ユーザー
+        admin_description: 管理者はユーザーを作成できます
+        role: 役割
+        last_logged_in: 最後のログイン
 
   misc:
     messages:
-      zero: "0 new messages"
-      one: "1 new message"
-      other: "%{count} new messages"
+      zero: "0件のメッセージ"
+      one: "1件のメッセージ"
+      other: "%{count}件のメッセージ"
 
   languages:
     en: English
     nl: Dutch
+    ja: Japanese
