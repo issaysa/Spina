@@ -5,7 +5,8 @@ class CreateSpinaTranslationTables < ActiveRecord::Migration
       menu_title: :string,
       description: :string,
       seo_title: :string,
-      materialized_path: :string
+      materialized_path: :string,
+      view_count: :integer
     }, {
       migrate_data: true,
       remove_source_columns: true

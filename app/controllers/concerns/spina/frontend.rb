@@ -13,7 +13,8 @@ module Spina
       elsif page.link_url.present?
         redirect_to page.link_url and return
       end
-
+      page.view_count = page.view_count + 1
+      page.save!
       render_with_template(page)
     end
 
