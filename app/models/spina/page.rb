@@ -2,7 +2,7 @@ module Spina
   class Page < ApplicationRecord
     include Spina::Partable
 
-    translates :title, :menu_title, :seo_title, :description, :materialized_path
+    translates :title, :menu_title, :seo_title, :description, :materialized_path, :view_count
 
     attr_accessor :old_path
 
@@ -54,6 +54,10 @@ module Spina
 
     def menu_title
       read_attribute(:menu_title).blank? ? title : read_attribute(:menu_title)
+    end
+
+    def view_count
+      read_attribute(:view_count).blank? ? 0 : read_attribute(:view_count)
     end
 
     def seo_title
