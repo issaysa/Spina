@@ -150,7 +150,7 @@ ja:
         size: サイズ
 
       spina/page:
-        title: タイトル
+        title: URL名
         title_placeholder: URL名
         seo_title: SEO <title>
         seo_title_placeholder: このタイトルは <title> タグに使われます
