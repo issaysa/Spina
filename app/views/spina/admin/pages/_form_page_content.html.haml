@@ -2,9 +2,19 @@
   .horizontal-form
     .horizontal-form-group
       .horizontal-form-label
+        = Spina::Page.human_attribute_name :menu_title
+      .horizontal-form-content
+        = f.text_field :menu_title, placeholder: Spina::Page.human_attribute_name(:show_in_menu_placeholder), value: f.object.read_attribute(:menu_title)
+      .horizontal-form-label
         = Spina::Page.human_attribute_name :title
       .horizontal-form-content
         = f.text_field :title, placeholder: Spina::Page.human_attribute_name(:title_placeholder)
+    .horizontal-form-group{style: ('display: none' if @page.custom_page?)}
+      .horizontal-form-label
+        = Spina::Page.human_attribute_name :ancestry
+      .horizontal-form-content
+        .select-dropdown.ancestry
+          = f.select :parent_id, page_ancestry_options(f.object), include_blank: Spina::Page.human_attribute_name(:no_parent)
 
     = f.fields_for :page_parts, @page_parts.sort { |a,b| a.position(current_theme) <=> b.position(current_theme) } do |ff|
       = ff.hidden_field :id

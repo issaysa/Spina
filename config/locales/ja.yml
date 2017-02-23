@@ -151,7 +151,7 @@ ja:
 
       spina/page:
         title: タイトル
-        title_placeholder: タイトル
+        title_placeholder: URL名
         seo_title: SEO <title>
         seo_title_placeholder: このタイトルは <title> タグに使われます
         description: Meta description
@@ -166,10 +166,10 @@ ja:
         link_url_placeholder: 例 http://www.example.com/
         show_in_menu: ナビゲーションに表示
         show_in_menu_description: "オフにするとナビゲーションに表示されません"
-        menu_title: ナビゲーションタイトル
-        menu_title_placeholder: ページタイトルと同じにするには空白にしてください
+        menu_title: タイトル
+        menu_title_placeholder: url名と同じにするには空白にしてください
         view_template: テンプレート
-        ancestry: 親ページ
+        ancestry: カテゴリー
         no_parent: 親なし
 
       spina/navigation:
