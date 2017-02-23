@@ -3,9 +3,18 @@ module Spina
     include Part
 
     belongs_to :structure_item, optional: true
-    belongs_to :structure_partable, polymorphic: true, optional: true
+    belongs_to :structure_partable, polymorphic: true, optional: true, :autosave => true
 
-    accepts_nested_attributes_for :structure_partable, allow_destroy: true
+    accepts_nested_attributes_for :structure_partable, allow_destroy: false
+
+    def autosave_associated_records_for_structure_partable
+      if new_keyword = Spina::Keyword.where('name=?',structure_partable.name).first
+      #if new_keyword = Spina::Keyword.where('id=? AND name=?',structure_partable.id,structure_partable.name).first
+        self.structure_partable = new_keyword
+      else
+        self.structure_partable.save!
+      end
+    end
 
     validates :structure_partable_type, presence: true
     validates :name, uniqueness: {scope: :structure_item_id}
