@@ -16,7 +16,6 @@
         .icon.icon-picture-o
 
     .button-group.pull-left
-      %button.button.button-small{ type: 'button', tabindex: -1, title: 'h1', data: { trix_attribute: 'heading1' }} H1
       %button.button.button-small{ type: 'button', tabindex: -1, title: 'h1', data: { trix_attribute: 'heading2' }} H2
       %button.button.button-small{ type: 'button', tabindex: -1, title: 'h2', data: { trix_attribute: 'heading3' }} H3
       %button.button.button-small{ type: 'button', tabindex: -1, title: 'h3', data: { trix_attribute: 'heading4' }} H4
@@ -24,6 +23,12 @@
       %button.button.button-small{ type: 'button', tabindex: -1, title: 'h5', data: { trix_attribute: 'heading6' }} H6
 
   .dialogs
+    .dialog.product_dialog{ data: { trix_attribute: 'href', trix_dialog: 'href'}}
+      .link_url_fields
+        %input{type: 'text', name: 'href', placeholder: 'Enter a URL…', required: true}
+        .button-group
+          %input.button{type: 'button', tabindex: -1, value: 'Link', data: { trix_method: 'setAttribute'}}
+          %input.button{type: 'button', tabindex: -1, value: 'Unlink', data: { trix_method: 'removeAttribute'}}
     .dialog.link_dialog{ data: { trix_attribute: 'href', trix_dialog: 'href'}}
       .link_url_fields
         %input{type: 'text', name: 'href', placeholder: 'Enter a URL…', required: true}

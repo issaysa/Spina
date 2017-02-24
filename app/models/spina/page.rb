@@ -14,7 +14,8 @@ module Spina
 
     before_validation :ensure_title
     before_validation :ancestry_is_nil
-    before_validation :set_materialized_path
+    #before_validation :set_materialized_path
+    after_create :set_materialized_path
     after_save :save_children
     after_save :rewrite_rule
     after_create :add_to_navigation
@@ -89,7 +90,7 @@ module Spina
       self.old_path = materialized_path
       self.materialized_path = localized_materialized_path
       self.materialized_path += "-#{self.class.where(materialized_path: materialized_path).count}" if self.class.where(materialized_path: materialized_path).where.not(id: id).count > 0
-      materialized_path
+      self.save
     end
 
     def cache_key
@@ -127,7 +128,7 @@ module Spina
       if root?
         name == 'homepage' ? '' : "#{url_title}"
       else
-        ancestors.collect(&:url_title).append(url_title).join('/')
+        ancestors.collect(&:url_title).append(self.id).join('/')
       end
     end
 
