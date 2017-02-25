@@ -56,7 +56,7 @@ module Spina
         if request.smart_phone?
           render layout: "#{current_theme.name.parameterize.underscore}/#{page.layout_template+'_smart_phone' || 'application_smart_phone' || page.layout_template || 'application'}", template: "#{current_theme.name.parameterize.underscore}/pages/#{page.view_template+'_smart_phone' || 'show_smart_phone' || page.view_template || 'show'}"
         else
-          render layout: "#{current_theme.name.parameterize.underscore}/#{page.layout_template || 'application'}", template: "#{current_theme
+          render layout: "#{current_theme.name.parameterize.underscore}/#{page.layout_template || 'application'}", template: "#{current_theme.name.parameterize.underscore}/pages/#{page.view_template || 'show'}"
         end
       end
 
