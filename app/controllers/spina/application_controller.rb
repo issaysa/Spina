@@ -4,6 +4,7 @@ module Spina
     protect_from_forgery with: :exception
 
     include ApplicationHelper
+    include Jpmobile::ViewSelector
 
     private
 
