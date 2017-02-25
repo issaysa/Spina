@@ -53,7 +53,11 @@ module Spina
       end
 
       def render_with_template(page)
-        render layout: "#{current_theme.name.parameterize.underscore}/#{page.layout_template || 'application'}", template: "#{current_theme.name.parameterize.underscore}/pages/#{page.view_template || 'show'}"
+        if request.smart_phone?
+          render layout: "#{current_theme.name.parameterize.underscore}/#{page.layout_template+'_smart_phone' || 'application_smart_phone' || page.layout_template || 'application'}", template: "#{current_theme.name.parameterize.underscore}/pages/#{page.view_template+'_smart_phone' || 'show_smart_phone' || page.view_template || 'show'}"
+        else
+          render layout: "#{current_theme.name.parameterize.underscore}/#{page.layout_template || 'application'}", template: "#{current_theme
+        end
       end
 
   end
