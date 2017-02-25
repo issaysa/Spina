@@ -12,8 +12,9 @@ module Spina
       #if new_keyword = Spina::Keyword.where('id=? AND name=?',structure_partable.id,structure_partable.name).first
         self.structure_partable = new_keyword
       else
-        self.structure_partable.save!
-        self.structure_partable = Spina::Keyword.where('name=?',structure_partable.name).first
+        structure_partable.save!
+        self.structure_partable = structure_partable
+        #self.structure_partable = Spina::Keyword.where('name=?',structure_partable.name).first
       end
     end
 
