@@ -12,7 +12,7 @@ module Spina
     has_many :navigation_items, dependent: :destroy
     has_many :navigations, through: :navigation_items
 
-    before_validation :ensure_title
+    #before_validation :ensure_title
     before_validation :ancestry_is_nil
     #before_validation :set_materialized_path
     after_create :set_materialized_path
@@ -21,7 +21,7 @@ module Spina
     after_create :add_to_navigation
 
     accepts_nested_attributes_for :page_parts, allow_destroy: true
-    validates_presence_of :title
+    #validates_presence_of :title
     validates :materialized_path, uniqueness: true
 
     scope :sorted, -> { order('position') }
