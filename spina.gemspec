@@ -26,6 +26,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'jquery-fileupload-rails'
   s.add_dependency 'carrierwave'
   s.add_dependency 'mini_magick'
+  s.add_dependency 'fog'
   s.add_dependency 'cancancan'
   s.add_dependency 'ancestry'
   s.add_dependency 'breadcrumbs_on_rails'
