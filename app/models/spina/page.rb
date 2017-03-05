@@ -126,7 +126,7 @@ module Spina
 
     def generate_materialized_path
       if root?
-        name == 'homepage' ? '' : "#{url_title}"
+        name == 'top' ? '' : "#{url_title}"
       else
         ancestors.collect(&:url_title).append(self.id).join('/')
       end
