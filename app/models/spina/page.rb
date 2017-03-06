@@ -129,9 +129,9 @@ module Spina
         name == 'top' ? '' : "#{url_title}"
       elsif self.view_template == 'category'
         #ancestors.collect(&:url_title).append(self.id).join('/')
-        name == '/' + self.url_title
+        self.url_title
       else
-        name == '/' + parent.url_title + self.id
+        parent.url_title + '/' + self.id
         #ancestors.collect(&:url_title).append(self.id).join('/')
       end
     end
