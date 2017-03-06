@@ -22,12 +22,14 @@ module Spina
         current_user.present?
       end
 
-      def render_404
+      def render_404(e=nil)
+        logger.info "Rendering 404 with exception: #{e.message}" if e
         file = request.smart_phone? ? "404sp.html" : "404.html"
         render file: "#{Rails.root}/public/"+file, status: 404
       end
 
-      def render_500
+      def render_500(e=nil)
+        logger.error "Rendering 500 with exception: #{e.message}" if e
         file = request.smart_phone? ? "500sp.html" : "500.html"
         render file: "#{Rails.root}/public/"+file, status: 404
       end
