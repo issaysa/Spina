@@ -131,7 +131,7 @@ module Spina
         #ancestors.collect(&:url_title).append(self.id).join('/')
         self.url_title
       else
-        parent.url_title + '/' + self.id
+        parent.url_title + '/' + self.id.to_s
         #ancestors.collect(&:url_title).append(self.id).join('/')
       end
     end
