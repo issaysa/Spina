@@ -5,6 +5,11 @@ module Spina
 
     include ApplicationHelper
     include Jpmobile::ViewSelector
+    before_action :set_format
+
+    def set_format
+      Thread.current[:format] = request[:format]
+    end
 
     private
 
