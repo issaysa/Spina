@@ -15,6 +15,13 @@ module Spina
       end
       page.view_count = page.view_count + 1
       page.save!
+      respond_to do |format|
+        format.html
+        @amp_ready = true
+        format.amp do
+          lookup_context.formats = [:amp, :html] # .htmlのテンプレートも検索する
+        end
+      end
       render_with_template(page)
     end
 
