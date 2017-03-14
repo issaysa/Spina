@@ -1,6 +1,10 @@
 module Spina
   module ApplicationHelper
 
+    def amp_ready?
+      defined?(@amp_ready) && @amp_ready == true
+    end
+    
     def current_account
       @current_account ||= Account.first
     end
