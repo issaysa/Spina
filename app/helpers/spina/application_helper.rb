@@ -5,7 +5,7 @@ module Spina
       defined?(@amp_ready) && @amp_ready == true
     end
     def amp_img(html)
-      html.gsub(/<img(.+) width="(.+)" height="(.+)">/,"<amp-img#{$1} width='350' height='#{($3.to_i/($2.to_i/350)).to_s}'></amp-img>")
+      html.gsub(/<figure .+?><img(.+?) width="(.+?)" height="(.+?)">.+?<\/figure>/){"<figure><amp-img#{$1} width='350' height='#{($3.to_i/($2.to_i/350.to_f).to_f).to_s}'></amp-img></figure>"}
     end
 
     def current_account
