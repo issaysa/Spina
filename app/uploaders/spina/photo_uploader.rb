@@ -2,10 +2,11 @@
 module Spina
   class PhotoUploader < Spina::DefaultStoreUploader
     include CarrierWave::MiniMagick
+    process resize_to_limit: [350,600]
 
-    version :image do
-      process resize_to_fit: [800, 800], if: :too_large?
-    end
+    #version :image do
+      #process resize_to_fit: [800, 800], if: :too_large?
+    #end
 
     version :thumb do
       process resize_to_fill: [150, 150]
