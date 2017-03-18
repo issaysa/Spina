@@ -13,7 +13,7 @@ module Spina
       elsif page.link_url.present?
         redirect_to page.link_url and return
       end
-      Page.update_column(:view_count, page.view_count+1)
+      ActiveRecord::Base.connection.execute("update spina_page_translations set view_count = #{page.view_count+1} where spina_page_id = #{page.id}")
       if page.view_template == 'show'
         respond_to do |format|
           format.html
