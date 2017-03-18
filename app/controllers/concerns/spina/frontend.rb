@@ -13,7 +13,7 @@ module Spina
       elsif page.link_url.present?
         redirect_to page.link_url and return
       end
-      Page.with_translations.update_column(:view_count, page.view_count+1)
+      Page.update_column(:view_count, page.view_count+1)
       if page.view_template == 'show'
         respond_to do |format|
           format.html
