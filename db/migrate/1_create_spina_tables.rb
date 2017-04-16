@@ -83,6 +83,7 @@ class CreateSpinaTables < ActiveRecord::Migration
       t.string   "ancestry"
       t.integer  "position"
       t.string   "materialized_path"
+      t.integer  "creator"
       t.boolean  "active",              default: true
     end
 

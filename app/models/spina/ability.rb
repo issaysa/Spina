@@ -6,7 +6,7 @@ module Spina
       if user.admin?
         can :manage, :all
       else
-        can :manage, Page
+        can :manage, Page, creator: user
         can :manage, Photo
         can :manage, Attachment
         can :manage, Account
