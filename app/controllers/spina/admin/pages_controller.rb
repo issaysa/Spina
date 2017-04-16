@@ -9,7 +9,11 @@ module Spina
 
       def index
         redirect_to admin_pages_path unless current_admin_path.starts_with?('/pages')
-        @pages = Page.active.sorted.roots
+        if @current_user.admin?
+          @pages = Page.active.sorted.roots
+        else
+          @pages = Page.active.sorted.roots.where(creator: @current_user.id)
+        end
       end
 
       def new
@@ -24,6 +28,7 @@ module Spina
 
       def create
         @page = Page.new(page_params)
+        @page.creator = @current_user.id
         add_breadcrumb I18n.t('spina.pages.new')
         if @page.save
           redirect_to spina.edit_admin_page_url(@page)

@@ -19,7 +19,6 @@ module Spina
     after_save :save_children
     after_save :rewrite_rule
     after_create :add_to_navigation
-    before_save :add_creator
 
     accepts_nested_attributes_for :page_parts, allow_destroy: true
     #validates_presence_of :title
@@ -38,9 +37,6 @@ module Spina
     alias_attribute :page_part, :part
     alias_attribute :parts, :page_parts
 
-    def add_creator
-      self.creator = current_user.id
-    end
 
     def to_s
       name
