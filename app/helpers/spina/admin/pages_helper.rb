@@ -46,8 +46,13 @@ module Spina
         hash.flat_map{|k, v| [k, *flatten_nested_hash(v)]}
       end
 
-      def page_ancestry_options(page)
-        pages = Spina::Page.active
+      def page_ancestry_options(page,view_template)
+
+        if view_template != "show"
+          pages = Spina::Page.where(view_template: "top")
+        else
+          pages = Spina::Page.active.where.not(view_template: "show").where.not(view_template: "info").where.not(view_template: "top")
+        end
         pages = pages.where.not(id: page.subtree.ids) unless page.new_record?
 
         flatten_nested_hash(pages.arrange(order: :position)).map do |page|
