@@ -1,4 +1,15 @@
-
+<script>
+$(function(){
+var set_choice = function(){
+var choice = $("input.choice_point").map(function(index, element){ return $(this).val() }).get();
+$('.choice_point_list').text(choice);
+};
+$(document).on('change','input.choice_point',function(){
+set_choice();
+});
+set_choice();
+});
+</script>
 %script{:src => '/js/keyword.js'}
 #page_content.tab-content.active.well
   .horizontal-form

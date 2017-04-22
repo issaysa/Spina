@@ -1,2 +1,7 @@
 = f.fields_for :structure_partable do |ff|
-  = ff.text_field :content, placeholder: f.object.title
+  - if f.object.title == "ポイント"
+    = ff.text_field :content, placeholder: f.object.title, class: "choice_point"
+  - else
+    = ff.text_field :content, placeholder: f.object.title
+  - if f.object.title=="各ポイントのスコア配列（34,24,23,12など）"
+    %p.choice_point_list
