@@ -4,8 +4,19 @@
       .horizontal-form-label
         = Spina::Page.human_attribute_name :draft
         %small= Spina::Page.human_attribute_name :draft_description
-      .horizontal-form-content
-        = f.check_box :draft, data: {switch: true}
+      - if current_user.admin?
+        .horizontal-form-content
+          = f.check_box :draft, data: {switch: true}
+      - else
+        .horizontal-form-content.disabled_checkbox
+          = f.check_box :draft, data: {switch: true}, disabled: true, class: "disabled"
+      <script>
+      $(function(){
+      $('.disabled_checkbox').on("click",'a', function(event) {
+      return false;
+      });
+      });
+      </script>
 
     .horizontal-form-group
       .horizontal-form-label

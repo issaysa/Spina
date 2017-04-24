@@ -18,6 +18,7 @@ module Spina
 
       def new
         @page = Page.new
+        @page.draft = true
         if current_theme.new_page_templates.any? { |template| template[0] == params[:view_template] }
           @page.view_template = params[:view_template]
         end
