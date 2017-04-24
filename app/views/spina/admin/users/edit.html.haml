@@ -1,4 +1,4 @@
 = render 'form'
 - pages = Spina::Page.with_translations.where(creator: @user.id).order("view_count DESC")
 - pages.each do |page|
-  %a{href: page.materialized_path} #{page.menu_title}（#{page.view_count}）
+  %a{href: page.materialized_path} #{page.menu_title}（#{page.view_count}）<br>

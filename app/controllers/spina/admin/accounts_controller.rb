@@ -9,7 +9,7 @@ module Spina
       end
 
       def update
-        if current_account.update_attributes(account_params)
+        if current_user.update_attributes(user_params)
           redirect_to :back
         else
           redirect_to :back
@@ -30,7 +30,16 @@ module Spina
         @layout_parts = current_theme.layout_parts.map { |layout_part| current_account.layout_part(layout_part) }
       end
 
+
       private
+
+      def set_breadcrumbs
+        add_breadcrumb I18n.t('spina.preferences.users'), spina.admin_users_path
+      end
+
+      def user_params
+        params.require(:user).permit(:admin, :email, :name, :password_digest, :password, :password_confirmation, :last_logged_in, :financial_institution_name, :financial_institution_code, :branch_name, :branch_code, :account_type, :account_number, :recipient_name)
+      end
 
       def account_params
         params.require(:account).permit(:address, :city, :email, :logo, :name, :phone,

@@ -140,6 +140,13 @@ class CreateSpinaTables < ActiveRecord::Migration
     create_table "spina_users", force: :cascade do |t|
       t.string   "name"
       t.string   "email"
+      t.string   "financial_institution_code"
+      t.string   "financial_institution_name"
+      t.string   "account_type"
+      t.string   "account_number"
+      t.string   "branch_code"
+      t.string   "branch_name"
+      t.string   "recipient_name"
       t.string   "password_digest"
       t.boolean  "admin",           default: false
       t.datetime "created_at",                      null: false

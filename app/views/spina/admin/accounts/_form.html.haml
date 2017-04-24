@@ -1,48 +1,127 @@
-= form_for [spina, :admin, current_account], url: spina.admin_account_path do |f|
+= form_for [spina, :admin, current_user], url: spina.admin_account_path do |f|
   %header#header
     = render partial: 'spina/admin/shared/breadcrumbs'
 
     #header_actions
       %button.button.button-primary{type: 'submit'}
         = icon('check')
-        = t('spina.preferences.account_save')
+        =t('spina.users.save')
+
+      = link_to t('spina.cancel'), spina.admin_users_path, class: 'button'
+
 
   .well
     .horizontal-form
       .horizontal-form-group
         .horizontal-form-label
-          = Spina::Account.human_attribute_name(:name)
+          = Spina::User.human_attribute_name :name
         .horizontal-form-content
-          = f.text_field :name, placeholder: Spina::Account.human_attribute_name(:name)
+          = f.text_field :name, placeholder: Spina::User.human_attribute_name(:name_placeholder), class: 'large'
 
       .horizontal-form-group
         .horizontal-form-label
-          = Spina::Account.human_attribute_name(:address)
+          = Spina::User.human_attribute_name :email
+          %small= Spina::User.human_attribute_name :email_description
         .horizontal-form-content
-          = f.text_field :address, placeholder: Spina::Account.human_attribute_name(:address)
+          = f.text_field :email, placeholder: Spina::User.human_attribute_name(:email)
 
       .horizontal-form-group
         .horizontal-form-label
-          = Spina::Account.human_attribute_name(:postal_code)
+          = Spina::User.human_attribute_name :password
+          %small= Spina::User.human_attribute_name :password_description
         .horizontal-form-content
-          = f.text_field :postal_code, placeholder: Spina::Account.human_attribute_name(:postal_code)
+          = f.password_field :password, placeholder: Spina::User.human_attribute_name(:password)
 
       .horizontal-form-group
         .horizontal-form-label
-          = Spina::Account.human_attribute_name(:city)
+          = Spina::User.human_attribute_name :password_confirmation
         .horizontal-form-content
-          = f.text_field :city, placeholder: Spina::Account.human_attribute_name(:city)
+          = f.password_field :password_confirmation, placeholder: Spina::User.human_attribute_name(:password_confirmation)
 
       .horizontal-form-group
         .horizontal-form-label
-          = Spina::Account.human_attribute_name(:phone)
+          = "銀行コード"
+          %small
+            %a{:href => "http://zengin.ajtw.net/", :rel => "nofollow", :target => "_blank"}= "銀行コードを探す"
         .horizontal-form-content
-          = f.text_field :phone, placeholder: Spina::Account.human_attribute_name(:phone)
+          = f.text_field :financial_institution_code, :class=>"form-control", :id => "bank_code", :min=>0, :max=>9999, :maxlenght=>4
 
       .horizontal-form-group
-        .horizontal-form-label
-          = Spina::Account.human_attribute_name(:email)
+        .horizontal-form-label= "銀行名"
         .horizontal-form-content
-          = f.text_field :email, placeholder: Spina::Account.human_attribute_name(:email)
+          = f.text_field :financial_institution_name, class:"form-control", :id => "bank_name"
+      .horizontal-form-group
+        .horizontal-form-label= "支店コード"
+        .horizontal-form-content
+          = f.text_field :branch_code, class:"form-control", :id => "branch_code", :min=>0, :max=>9999, :maxlenght=>4
+      .horizontal-form-group
+        .horizontal-form-label= "支店名"
+        .horizontal-form-content
+          = f.text_field :branch_name, class:"form-control", :id =>"branch_name"
+      .horizontal-form-group
+        .horizontal-form-label= "種類"
+        .horizontal-form-content
+          = f.select(:account_type,[["普通口座","1"], ["貯蓄口座","2"], ["当座預金","3"]],{},{class:"form-control"})
+      .horizontal-form-group
+        .horizontal-form-label= "口座番号"
+        .horizontal-form-content
+          = f.text_field :account_number, class:"form-control", :min=>0, :max=>9999999999, :maxlenght=>10
+      .horizontal-form-group
+        .horizontal-form-label= "受取人名"
+        .horizontal-form-content
+          = f.text_field :recipient_name, class:"form-control"
 
-  
+
+      <script>
+      // handling bank code
+      $('#bank_code').keyup(function(e){
+      console.log("keyup");
+      if (!((48 <= e.keyCode && e.keyCode <= 57) || e.keyCode == 91 || e.keyCode == 17)) { // 0 - 9, cmd, ctrl
+      return;
+      }
+
+      $('#bank_name').val('').attr('placeholder', ''); // empty
+
+      bank_code = $('#bank_code').val();
+
+      if (bank_code.length != 4) {
+      return;
+      }
+
+      $.getJSON("https://bank.teraren.com/banks/" + bank_code + ".json", function(json){
+      $('#bank_name').val(json.kana);
+      }).error(function(jqXHR, textStatus, errorThrown) {
+      $('#bank_name').val('');
+      });
+
+      });
+
+
+      // handling bank branch code
+      $('#branch_code').keyup(function(e){
+
+      if (!(48 <= e.keyCode && e.keyCode <= 57)) { // 0 - 9
+      return;
+      }
+
+      $('#branch_name').val('').attr('placeholder', ''); // empty
+
+      bank_code = $('#bank_code').val();
+      bank_branch = $('#branch_code').val();
+
+      if (bank_code.length != 4) {
+      return;
+      }
+
+      if (bank_branch.length != 3) {
+      return;
+      }
+
+      $.getJSON("https://bank.teraren.com/banks/" + bank_code + "/branches/"+bank_branch+".json", function(json){
+      $('#branch_name').val(json.kana);
+      }).error(function(jqXHR, textStatus, errorThrown) {
+      $('#branch_name').val('').attr('placeholder', ''); // empty
+      });
+
+      });
+      </script>

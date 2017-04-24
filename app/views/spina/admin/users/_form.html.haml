@@ -12,7 +12,7 @@
   - if @user.errors.any?
     - content_for :notification_alert do
       .notification.notification-error{data: {icon: 'm'}}
-        %p 
+        %p
           = Spina::User.human_attribute_name :cannot_be_created
           %small
             - @user.errors.full_messages.each do |msg|
@@ -53,6 +53,86 @@
           %small= Spina::User.human_attribute_name :admin_description
         .horizontal-form-content
           = f.check_box :admin, data: {switch: 'true'}
+
+      .horizontal-form-group
+        .horizontal-form-label= "銀行名"
+        .horizontal-form-content
+          = f.text_field :financial_institution_name, class:"form-control", :id => "bank_name"
+      .horizontal-form-group
+        .horizontal-form-label= "支店コード"
+        .horizontal-form-content
+          = f.text_field :branch_code, class:"form-control", :id => "branch_code", :min=>0, :max=>9999, :maxlenght=>4
+      .horizontal-form-group
+        .horizontal-form-label= "支店名"
+        .horizontal-form-content
+          = f.text_field :branch_name, class:"form-control", :id =>"branch_name"
+      .horizontal-form-group
+        .horizontal-form-label= "種類"
+        .horizontal-form-content
+          = f.select(:account_type,[["普通口座","1"], ["貯蓄口座","2"], ["当座預金","3"]],{},{class:"form-control"})
+      .horizontal-form-group
+        .horizontal-form-label= "口座番号"
+        .horizontal-form-content
+          = f.text_field :account_number, class:"form-control", :min=>0, :max=>9999999999, :maxlenght=>10
+      .horizontal-form-group
+        .horizontal-form-label= "受取人名"
+        .horizontal-form-content
+          = f.text_field :recipient_name, class:"form-control"
+
+
+      <script>
+      // handling bank code
+      $('#bank_code').keyup(function(e){
+      console.log("keyup");
+      if (!((48 <= e.keyCode && e.keyCode <= 57) || e.keyCode == 91 || e.keyCode == 17)) { // 0 - 9, cmd, ctrl
+      return;
+      }
+
+      $('#bank_name').val('').attr('placeholder', ''); // empty
+
+      bank_code = $('#bank_code').val();
+
+      if (bank_code.length != 4) {
+      return;
+      }
+
+      $.getJSON("https://bank.teraren.com/banks/" + bank_code + ".json", function(json){
+      $('#bank_name').val(json.kana);
+      }).error(function(jqXHR, textStatus, errorThrown) {
+      $('#bank_name').val('');
+      });
+
+      });
+
+
+      // handling bank branch code
+      $('#branch_code').keyup(function(e){
+
+      if (!(48 <= e.keyCode && e.keyCode <= 57)) { // 0 - 9
+      return;
+      }
+
+      $('#branch_name').val('').attr('placeholder', ''); // empty
+
+      bank_code = $('#bank_code').val();
+      bank_branch = $('#branch_code').val();
+
+      if (bank_code.length != 4) {
+      return;
+      }
+
+      if (bank_branch.length != 3) {
+      return;
+      }
+
+      $.getJSON("https://bank.teraren.com/banks/" + bank_code + "/branches/"+bank_branch+".json", function(json){
+      $('#branch_name').val(json.kana);
+      }).error(function(jqXHR, textStatus, errorThrown) {
+      $('#branch_name').val('').attr('placeholder', ''); // empty
+      });
+
+      });
+      </script>
 
   - unless @user.new_record? || @user == current_user
     .pull-right= link_to t('spina.permanently_delete'), spina.admin_user_path(@user), method: :delete, data: {confirm: t('spina.users.delete_confirmation', user: @user)}, class: 'button button-link button-danger'
