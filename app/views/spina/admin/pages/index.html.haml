@@ -32,4 +32,8 @@
 .well
   .dd#pages_list{data: {:"sort-url" => spina.sort_admin_pages_url }}
     %ol.dd-list
+      %div.dd-item-inner
+        %a{href: 'http://top9.jp/manual', target: 'blank', class: 'button button-link button-small sortable-link'} マニュアル
+      %div.dd-item-inner
+        %a{href: 'http://top9.jp/manual2', target: 'blank', class: 'button button-link button-small sortable-link'} マニュアル２
       = render partial: 'page_nested_list', collection: @pages.roots
