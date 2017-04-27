@@ -19,7 +19,8 @@
       %tbody
         - @users.each do |user|
           %tr
-            %td= link_to user, spina.edit_admin_user_path(user)
+            %td
+              <a href="/admin/users/#{user.id}/edit">#{user.name}</a>（<a href="mailto:#{user.email}">メール</a>）
             %td= user.admin? ? Spina::User.human_attribute_name(:admin) : Spina::User.human_attribute_name(:user)
             %td
               - if user.last_logged_in.present?

@@ -78,7 +78,7 @@ class CreateSpinaTables < ActiveRecord::Migration
       t.boolean  "skip_to_first_child", default: false
       t.string   "view_template"
       t.string   "layout_template"
-      t.boolean  "draft",               default: false
+      t.boolean  "draft",               default: true
       t.string   "link_url"
       t.string   "ancestry"
       t.integer  "position"

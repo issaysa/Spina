@@ -9,8 +9,9 @@
       %ul
         %li{class: ('active' if current_admin_path.start_with?('/pages') || current_admin_path.start_with?('/navigations'))}
           = link_to t('spina.website.pages'), spina.admin_pages_path
-        %li{class: ('active' if current_admin_path.start_with?('/photos', '/attachments'))}
-          = link_to t('spina.website.media_library'), spina.admin_photos_path
+        - if current_user.admin?
+          %li{class: ('active' if current_admin_path.start_with?('/photos', '/attachments'))}
+            = link_to t('spina.website.media_library'), spina.admin_photos_path
         - Spina::Plugin.all.each do |plugin|
           - if current_theme.plugins.include? plugin.name
             - if lookup_context.exists? "spina/admin/hooks/#{ plugin.namespace }/_website_secondary_navigation"
@@ -34,15 +35,16 @@
       %ul
         %li{class: ('active' if params[:action] == 'edit' && params[:controller] == 'spina/admin/accounts')}
           = link_to t('spina.preferences.account'), spina.edit_admin_account_path
-        %li{class: ('active' if params[:action] == 'style')}
-          = link_to t('spina.preferences.style'), spina.style_admin_account_path
-        - if can? :manage, Spina::User
-          %li{class: ('active' if %w[users].include? controller_name)}
-            = link_to t('spina.preferences.users'), spina.admin_users_path
-        %li{class: ('active' if params[:action] == 'social')}
-          = link_to t('spina.preferences.social_media'), spina.social_admin_account_path
-        %li{class: ('active' if params[:action] == 'analytics')}
-          = link_to t('spina.preferences.analytics'), spina.analytics_admin_account_path
+        - if current_user.admin?
+          %li{class: ('active' if params[:action] == 'style')}
+            = link_to t('spina.preferences.style'), spina.style_admin_account_path
+          - if can? :manage, Spina::User
+            %li{class: ('active' if %w[users].include? controller_name)}
+              = link_to t('spina.preferences.users'), spina.admin_users_path
+          %li{class: ('active' if params[:action] == 'social')}
+            = link_to t('spina.preferences.social_media'), spina.social_admin_account_path
+          %li{class: ('active' if params[:action] == 'analytics')}
+            = link_to t('spina.preferences.analytics'), spina.analytics_admin_account_path
 
         - Spina::Plugin.all.each do |plugin|
           - if current_theme.plugins.include? plugin.name
