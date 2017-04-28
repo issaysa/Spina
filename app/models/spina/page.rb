@@ -131,9 +131,11 @@ module Spina
       elsif self.view_template == 'category'
         #ancestors.collect(&:url_title).append(self.id).join('/')
         self.url_title
-      else
+      elsif parent && parent.url_title
         parent.url_title + '/' + self.id.to_s
         #ancestors.collect(&:url_title).append(self.id).join('/')
+      else
+        self.id.to_s
       end
     end
 
