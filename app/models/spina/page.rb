@@ -127,7 +127,7 @@ module Spina
 
     def generate_materialized_path
       if root?
-        name == 'top' ? '' : "#{url_title}"
+        name == 'top' ? '' : self.id.to_s
       elsif self.view_template == 'category'
         #ancestors.collect(&:url_title).append(self.id).join('/')
         self.url_title
