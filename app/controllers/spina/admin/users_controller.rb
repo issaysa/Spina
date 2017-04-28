@@ -54,7 +54,7 @@ module Spina
       end
 
       def user_params
-        params.require(:user).permit(:admin, :email, :name, :password_digest, :password, :password_confirmation, :last_logged_in, :financial_institution_name, :financial_institution_code, :branch_name, :branch_code, :account_type, :account_number, :recipient_name)
+        params.require(:user).permit(:admin, :email, :name, :password_digest, :password, :password_confirmation, :last_logged_in, :financial_institution_name, :financial_institution_code, :branch_name, :branch_code, :account_type, :account_number, :recipient_name, :memo)
       end
 
     end
